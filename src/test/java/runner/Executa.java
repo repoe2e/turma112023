@@ -10,6 +10,7 @@ public class Executa extends Drivers {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("http://52.2.114.98/");
+		
 	}
 
 	public static void finalizarTeste() {

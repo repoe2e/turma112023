@@ -11,6 +11,7 @@ public class HomePage {
 	private By btnAbrirConta = By.xpath("//button[@class='open-account-button']");
 
 	public void acessarMenu(String menu) {
+		
 		if (menu.equalsIgnoreCase("Login")) {
 			metodo.clicar(btnLogin);
 		} else if (menu.equalsIgnoreCase("Abrir conta")) {
@@ -18,6 +19,7 @@ public class HomePage {
 		} else {
 			System.out.println("Informar o menju Login ou Abrir conta");
 		}
+		metodo.tirarPrint(menu, menu);
 	}
 
 }
