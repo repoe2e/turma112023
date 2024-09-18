@@ -197,5 +197,6 @@ public class Metodos extends Drivers {
 	public void verificaCheckBoxSelecionado() {
 
 	}
+	// atualizado
 
 }
