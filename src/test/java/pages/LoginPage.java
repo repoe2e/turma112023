@@ -2,13 +2,13 @@ package pages;
 
 import org.openqa.selenium.By;
 
-import elementos.Elementos;
+import elementos.ElementosBankE2E;
 import metodos.Metodos;
 
 public class LoginPage {
 	
 	Metodos metodo = new Metodos();
-	Elementos el = new Elementos();
+	ElementosBankE2E el = new ElementosBankE2E();
 	
 	private By nomePaginaLogado = By.xpath("");
 	

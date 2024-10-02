@@ -1,9 +1,13 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 
 public class GerenciadorDeArquivos {
 
@@ -53,6 +57,7 @@ public class GerenciadorDeArquivos {
 
 	public String lerArquivoXML(String arquivo) {
 		StringBuilder conteudo = new StringBuilder();
+
 		try (BufferedReader reader = new BufferedReader(new FileReader("./src/test/resources/arquivos/" + arquivo))) {
 
 			String linha;
@@ -70,7 +75,30 @@ public class GerenciadorDeArquivos {
 		return conteudo.toString();
 	}
 
-	// PDF
+	/**
+	 * 
+	 * @return
+	 * @author Anderson Barbosa
+	 */
+	public String lerArquivoPDF(String arquivoPDF) {
+
+		StringBuilder conteudo = new StringBuilder();
+
+		try (PDDocument documento = PDDocument.load(new File("./src/test/resources/arquivos/" + arquivoPDF))) {
+
+			PDFTextStripper stripper = new PDFTextStripper();
+
+			conteudo.append(stripper.getText(documento));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Erro ao tentar ler pdf");
+		}
+
+		return conteudo.toString();
+
+	}
+
 
 	// Excel
 

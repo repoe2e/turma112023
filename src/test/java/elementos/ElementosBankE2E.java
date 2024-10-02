@@ -2,7 +2,7 @@ package elementos;
 
 import org.openqa.selenium.By;
 
-public class Elementos {
+public class ElementosBankE2E {
 
 	// Elementos iniciarAbertura de conta
 

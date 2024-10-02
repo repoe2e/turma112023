@@ -1,19 +1,24 @@
 package metodos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.io.File;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.github.javafaker.File;
 
 import drivers.Drivers;
 
@@ -65,14 +70,15 @@ public class Metodos extends Drivers {
 	 */
 	public void aguardarElemento(By elemento) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(elemento));
 	}
 
 	public void tirarPrint(String nomePastaDoTeste, String nomeDoTeste) {
 
-		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		java.io.File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		try {
-			FileUtils.copyFile(scrFile, new File("./evidencias/" + nomePastaDoTeste + "/" + nomeDoTeste + ".png"));
+			FileUtils.copyFile(scrFile, new java.io.File("./evidencias/" + nomePastaDoTeste + "/" + nomeDoTeste + ".png"));
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -134,19 +140,38 @@ public class Metodos extends Drivers {
 	}
 
 	public void tab() {
-
+		Actions actions = new Actions(driver);
+		actions.sendKeys(Keys.TAB).perform();
 	}
 
-	public void Enter() {
+	public void enter() {
+		Actions actions = new Actions(driver);
+		actions.sendKeys(Keys.END).perform();
+	}
 
+	public void enter(By elemento) {
+		driver.findElement(elemento).sendKeys(Keys.ENTER);
+	}
+
+	public void home() {
+		Actions actions = new Actions(driver);
+		actions.sendKeys(Keys.HOME).perform();
+	}
+
+	public void end() {
+		Actions actions = new Actions(driver);
+		actions.sendKeys(Keys.END).perform();
 	}
 
 	public void limparCampo(By elemento) {
 		driver.findElement(elemento).clear();
 	}
 
-	public void digitarPausadamente() {
-
+	public void digitarPausadamente(By elemento, String texto) {
+		for (char c : texto.toCharArray()) {
+			driver.findElement(elemento).sendKeys(String.valueOf(c));
+			pausa(1000);
+		}
 	}
 
 	public void clicaESegura(By elemento) {
@@ -160,24 +185,24 @@ public class Metodos extends Drivers {
 		driver.findElement(elemento).submit();
 	}
 
-	public void validarTitle() {
-
+	public void validarTitle(String titleEsperado) {
+		assertEquals(titleEsperado, driver.getTitle());
 	}
 
 	public void voltaPagina() {
-
+		driver.navigate().back();
 	}
 
 	public void avancarPagina() {
-
+		driver.navigate().forward();
 	}
 
-	public void reflash() {
-
+	public void atualizarPagina() {
+		driver.navigate().refresh();
 	}
 
-	public void uploadDeArquivo() {
-
+	public void uploadDeArquivo(By elemento, String path) {
+		driver.findElement(elemento).sendKeys(path);
 	}
 
 	public void fecharPopUp(By elemento) {
@@ -187,16 +212,9 @@ public class Metodos extends Drivers {
 			clicar(elemento);
 			contador--;
 		} while (element.isDisplayed() && contador > 0);
-
 	}
 
-	public void verificaTextoPresente() {
+	public void pausa(int tempo) {
 
 	}
-
-	public void verificaCheckBoxSelecionado() {
-
-	}
-	// atualizado
-
 }

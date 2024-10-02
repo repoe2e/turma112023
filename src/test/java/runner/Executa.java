@@ -9,7 +9,7 @@ public class Executa extends Drivers {
 	public static void iniciarTeste() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.get("http://52.2.114.98/");
+		driver.get("https://www.saucedemo.com");
 		
 	}
 
