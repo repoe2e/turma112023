@@ -15,10 +15,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.github.javafaker.File;
 
 import drivers.Drivers;
 
@@ -104,6 +103,7 @@ public class Metodos extends Drivers {
 	}
 
 	public void validarAlert(String textoEsperado) {
+		pausa(5000);
 		Alert alert = driver.switchTo().alert();
 		assertEquals(alert.getText(), textoEsperado);
 	}
@@ -215,6 +215,11 @@ public class Metodos extends Drivers {
 	}
 
 	public void pausa(int tempo) {
-
+		try {
+			Thread.sleep(tempo);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -6,8 +6,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReports {
-	
-	
+		
 	private static com.aventstack.extentreports.ExtentReports extent;
 	private static ExtentTest test; // gerenciar testes
 	private static ExtentSparkReporter sparkReporter; // gerar relatórios no formato HTML
